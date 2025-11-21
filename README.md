@@ -1,36 +1,46 @@
-## 🧪 How to Work on the Exercises
+# Electricity Price Analysis Tool
 
-Each exercise is described in a GitHub Issue. Follow these steps to complete an exercise and submit your solution:
+This CLI program helps users optimize their energy consumption decisions by analyzing Swedish electricity prices.  
+The application retrieves data from the [Elpris API](https://www.elprisetjustnu.se/elpris-api) and displays prices in **öre** (1/100 of a SEK).
 
-### 📥 1. Clone or Fork the Repository
-```bash
-git clone https://github.com/fungover/exercise2025.git
-```
-Or fork the repository via GitHub and clone your fork.
+---
 
-### 🌱 2. Create a Branch
-Create a new branch named using the format: your-github-username/exerciseNumber
+## Features
 
-Example for user githubuser working on Exercise 1:
+- **Fetches electricity prices**  
+  Retrieves the current day's prices and, if available, the prices for the next day from the Elpris API.
 
-```bash
-git checkout -b githubuser/exercise1
-```
+- **Zone selection**  
+  Users can select their price zone via CLI interaction.  
+  *If no console is available, the program defaults to **SE3**.*
 
-### 🛠️ 3. Implement Your Solution
-Follow the instructions in the corresponding issue. If anything is unclear, ask questions by commenting directly on the issue.
+- **Statistics**  
+  - Displays mean price for the current 24-hour period (and next 24 hours, when available).  
+  - Shows minimum and maximum prices based on the available dataset.
 
-### 🚀 4. Push Your Branch
-```bash
-git push origin githubuser/exercise1
-```
+- **Optimal charging time**  
+  Uses a sliding window algorithm to find the best charging period (2, 4, or 8 hours) starting from the current time.
 
-### 📬 5. Create a Pull Request
-Open a Pull Request (PR) from your branch.
+---
 
-Link the PR to the issue you're solving.
+## Error Handling & User Experience
 
-Include a clear description of your solution.
+- **Invalid input**  
+  Zone selections are validated. If an invalid option is entered, the user is prompted to try again.
 
-### 💬 6. Feedback and Iteration
-Reviewers may leave comments or suggestions. Update your branch and push changes until the PR is approved.
+- **Unavailable data**  
+  If the Elpris API is unreachable or tomorrow’s prices are not yet published, the program informs the user instead of crashing.
+
+- **Friendly messages**  
+  The program prints clear messages in Swedish (e.g. `"Kunde inte hämta dagens priser"`) rather than technical stack traces in most cases.
+
+- **Default behavior in IDEs**  
+  If console input is not available, the program automatically selects zone **SE3**.
+
+---
+
+## Getting Started
+
+1. Compile and run the program, starting from the main entry point:  
+   ```bash
+   App.java
